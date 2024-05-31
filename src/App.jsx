@@ -21,8 +21,8 @@ function App() {
       <div className='cart-to-do'>
         <h1>Listas de tareas</h1>
         <div className='counter-todos'>
-          <h3>N° de tareas: {todosCount}</h3>
-          <h3>Pendientes: {pendingTodosCount}</h3>
+          <h3>N° de tareas: <span>{todosCount}</span></h3>
+          <h3>Pendientes: <span>{pendingTodosCount}</span></h3>
         </div>
       
 

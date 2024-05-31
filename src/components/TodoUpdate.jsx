@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { GrEdit } from "react-icons/gr";
 import { useForm } from "../hooks/useForm";
 
@@ -8,6 +8,9 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
         updateDescription: todo.description,
     });
 
+    const [disabled, setDisabled] = useState(true);
+    const focusInputRef = useRef();
+
     const onSubmitUpdate = e => {
         e.preventDefault()
 
@@ -16,6 +19,9 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
 
         handleUpdateTodo(id, description)
 
+        setDisabled(!disabled)
+
+        focusInputRef.current.focus()
     };
 
 
@@ -23,11 +29,13 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
         <form onSubmit={onSubmitUpdate}>
             <input 
                 type="text" 
-                className="input-update" 
+                className={`input-update ${todo.done ? 'text-decoration-dashed' : ''}`}
                 name='updateDescription'
                 value={updateDescription}
                 onChange={onInputChange}
-                placeholder="¿Qué hay que hacer?" 
+                placeholder="¿Qué hay que hacer?"
+                readOnly={disabled}
+                ref={focusInputRef}
             />
             <button className="btn-edit" type="submit">
                 <GrEdit />
