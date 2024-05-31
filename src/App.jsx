@@ -2,25 +2,41 @@ import { useState } from 'react'
 import './App.css';
 import { TodoList } from './components/TodoList';
 import { TodoAdd } from './components/TodoAdd';
+import { useTodo } from './hooks/useTodo';
 
 function App() {
+
+  const {         
+    todos,
+    todosCount,
+    pendingTodosCount,
+    handleNewTodo,
+    handleDeleteTodo,
+    handleCompleteTodo,
+    handleUpdateTodo 
+  } = useTodo();
 
   return (
     <>
       <div className='cart-to-do'>
         <h1>Listas de tareas</h1>
         <div className='counter-todos'>
-          <h3>N° de tareas: 4</h3>
-          <h3>Pendientes: 3</h3>
+          <h3>N° de tareas: {todosCount}</h3>
+          <h3>Pendientes: {pendingTodosCount}</h3>
         </div>
       
 
         <div className='add-todo'>
           <h3>Agregar tarea</h3>
-          <TodoAdd />
+          <TodoAdd handleNewTodo={handleNewTodo} />
         </div>
 
-        <TodoList />
+        <TodoList 
+          todos={todos}
+          handleUpdateTodo={handleUpdateTodo}
+          handleDeleteTodo={handleDeleteTodo}
+          handleCompleteTodo={handleCompleteTodo}
+        />
       </div>
     </>
   );

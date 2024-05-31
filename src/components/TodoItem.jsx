@@ -2,14 +2,21 @@ import React from "react";
 import { GoTrash } from 'react-icons/go';
 import { TodoUpdate } from "./TodoUpdate";
 
-export const TodoItem = () => {
+export const TodoItem = ({ 
+    todo, 
+    handleUpdateTodo, 
+    handleDeleteTodo, 
+    handleCompleteTodo 
+ }) => {
     return (
         <li>
-            <span>
+            <span onClick={() => handleCompleteTodo(todo.id)}>
                 <label htmlFor="" className="container-done"></label>
             </span>
-            <TodoUpdate />
-            <button className="btn-delete"><GoTrash /></button>
+            <TodoUpdate todo={todo} handleUpdateTodo={handleUpdateTodo} />
+            <button className="btn-delete" onClick={() => handleDeleteTodo(todo.id)}>
+                <GoTrash />
+            </button>
         </li>
     )
 }
